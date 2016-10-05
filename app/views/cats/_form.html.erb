@@ -1,0 +1,32 @@
+
+<form action="http://localhost:3000/cats/<%="#{@cat.id}"%>" method="post">
+  <%if @cat.persisted?%>
+    <input type="hidden" name="_method" value="PATCH">
+  <% end %>
+
+  <h3>Name<input type="text" name="cat[name]" value= "<%="#{@cat.name}"%>"></h3>
+
+    <input type="radio" name="cat[sex]" id= "female" value="F" <%=@cat.sex == "F" ? "checked" : ""%>></input>
+    <label for="female">Female</label>
+    <input type="radio" name="cat[sex]" id= "male" value="M" <%=@cat.sex == "M" ? "checked" : ""%>></input>
+    <label for="male">Male</label>
+  <br>
+
+  <h3>Color
+  <select name="cat[color]", id="color">
+    <option value=""></option>
+    <%Cat.color.each do |color|%>
+      <% if @cat.color == color  %>
+        <option value"<% color %>" selected><%=color%></option>
+      <% else  %>
+        <option value"<% color %>"><%=color%></option>
+      <% end  %>
+    <%end %>
+  </select>
+</h3>
+  <h3>Birth Date <input type="date" name="cat[birth_date]" value= "<%="#{@cat.birth_date}"%>"></h3>
+  <h3>Description</h3>
+  <textarea rows = "10" cols = "50" name="cat[description]" id="cat_description" ><%="#{@cat.description}"%></textarea>
+  <br>
+  <button>Submit</button>
+</form>
